@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nail Beauty Brand</title>
+
+<style>
+
+body{
+font-family: Arial;
+margin:0;
+background:#fff5f8;
+}
+
+header{
+background:#ff4da6;
+color:white;
+padding:15px;
+text-align:center;
+}
+
+nav{
+display:flex;
+justify-content:center;
+gap:20px;
+background:white;
+padding:10px;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+nav a{
+text-decoration:none;
+color:#333;
+font-weight:bold;
+}
+
+.search-box{
+text-align:center;
+margin:20px;
+}
+
+.search-box input{
+padding:10px;
+width:250px;
+border-radius:25px;
+border:1px solid #ccc;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.product{
+background:white;
+padding:15px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.product img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.product h3{
+margin:10px 0;
+}
+
+.product button{
+background:#ff4da6;
+color:white;
+border:none;
+padding:8px 15px;
+border-radius:20px;
+cursor:pointer;
+}
+
+footer{
+background:#333;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Nail Beauty Brand</h1>
+<p>Premium Nail Products</p>
+</header>
+
+<nav>
+<a href="#">Home</a>
+<a href="#">Products</a>
+<a href="#">Gallery</a>
+<a href="#">Contact</a>
+</nav>
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search Nail Products..." onkeyup="searchProduct()">
+</div>
+
+<section class="products">
+
+<div class="product">
+<img src="https://images.unsplash.com/photo-1604654894610-df63bc536371">
+<h3>Red Nail Polish</h3>
+<button>Buy Now</button>
+</div>
+
+<div class="product">
+<img src="https://images.unsplash.com/photo-1585386959984-a41552231658">
+<h3>Pink Nail Polish</h3>
+<button>Buy Now</button>
+</div>
+
+<div class="product">
+<img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc">
+<h3>Nail Art Kit</h3>
+<button>Buy Now</button>
+</div>
+
+<div class="product">
+<img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348">
+<h3>Nail Remover</h3>
+<button>Buy Now</button>
+</div>
+
+<div class="product">
+<img src="https://images.unsplash.com/photo-1599948127759-7c7a8c8c5d9d">
+<h3>Gel Nail Polish</h3>
+<button>Buy Now</button>
+</div>
+
+<div class="product">
+<img src="https://images.unsplash.com/photo-1625093742435-6fa192b6fb10">
+<h3>Nail Care Kit</h3>
+<button>Buy Now</button>
+</div>
+
+</section>
+
+<footer>
+<p>© 2026 Nail Beauty Brand | All Rights Reserved</p>
+</footer>
+
+<script>
+
+function searchProduct(){
+
+let input=document.getElementById("searchInput").value.toLowerCase();
+let products=document.getElementsByClassName("product");
+
+for(let i=0;i<products.length;i++){
+
+let text=products[i].innerText.toLowerCase();
+
+if(text.includes(input)){
+products[i].style.display="";
+}else{
+products[i].style.display="none";
+}
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
