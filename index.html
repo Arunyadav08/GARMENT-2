@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Nail Paint Store</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background-color: #f4f4f4; padding: 1em; text-align: center; }
+        nav ul { list-style-type: none; padding: 0; margin: 0; display: flex; justify-content: center; }
+        nav li { margin: 0 1em; }
+        nav a { text-decoration: none; color: black; }
+        main { padding: 2em; }
+        .filters { margin-bottom: 2em; }
+        .filters select { margin-right: 1em; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1em; }
+        .product-item { border: 1px solid #ccc; padding: 1em; text-align: center; }
+        footer { background-color: #f4f4f4; text-align: center; padding: 1em; }
+    </style>
 </head>
 <body>
     <header>
@@ -25,6 +37,20 @@
 
         <section id="products">
             <h2>Our Products</h2>
+            <div class="filters">
+                <select id="colorFilter">
+                    <option value="">All Colors</option>
+                    <option value="pink">Pink</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                </select>
+                <select id="typeFilter">
+                    <option value="">All Types</option>
+                    <option value="glitter">Glitter</option>
+                    <option value="matte">Matte</option>
+                    <option value="base">Base Coat</option>
+                </select>
+            </div>
             <div class="product-grid" id="productGrid"></div>
         </section>
 
@@ -34,6 +60,63 @@
         </section>
     </main>
 
-    <script src="app.js"></script>
+    <footer>
+        &copy; 2023 Nail Paint Store
+    </footer>
+
+    <script>
+        // Comprehensive product data
+        const allProducts = [
+            { name: "Pink Glitter", price: "$15.99", type: "glitter", color: "pink" },
+            { name: "Matte Black", price: "$12.99", type: "matte", color: "black" },
+            { name: "Clear Base Coat", price: "$8.99", type: "base", color: "clear" },
+            { name: "Royal Blue Matte", price: "$13.99", type: "matte", color: "blue" },
+            { name: "Forest Green Glitter", price: "$16.99", type: "glitter", color: "green" },
+            { name: "Rose Gold Glitter", price: "$17.99", type: "glitter", color: "pink" },
+            { name: "Deep Purple Matte", price: "$14.99", type: "matte", color: "purple" },
+            { name: "Turquoise Glitter", price: "$18.99", type: "glitter", color: "blue" },
+            { name: "Lavender Base Coat", price: "$9.99", type: "base", color: "purple" },
+            { name: "Burgundy Matte", price: "$12.99", type: "matte", color: "red" },
+            { name: "Sunset Orange Glitter", price: "$15.99", type: "glitter", color: "orange" },
+            { name: "Coral Base Coat", price: "$10.99", type: "base", color: "pink" }
+        ];
+
+        // Filter products based on selections
+        function filterProducts(products, color, type) {
+            return products.filter(p => 
+                (color ? p.color.includes(color) : true) &&
+                (type ? p.type.includes(type) : true)
+            );
+        }
+
+        // Render products to the page
+        function renderProducts(products) {
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = '';
+
+            products.forEach(product => {
+                const div = document.createElement('div');
+                div.className = 'product-item';
+                div.innerHTML = `<h3>${product.name}</h3><p>${product.price}</p>`;
+                productGrid.appendChild(div);
+            });
+        }
+
+        // Set up event listeners for filters
+        document.addEventListener('DOMContentLoaded', () => {
+            const colorFilter = document.getElementById('colorFilter');
+            const typeFilter = document.getElementById('typeFilter');
+
+            [colorFilter, typeFilter].forEach(filter => {
+                filter.addEventListener('change', () => {
+                    const filtered = filterProducts(allProducts, 
+                        colorFilter.value, typeFilter.value);
+                    renderProducts(filtered);
+                });
+            });
+
+            renderProducts(allProducts); // Initial render
+        });
+    </script>
 </body>
 </html>
